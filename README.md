@@ -4,4 +4,4 @@ Each project has its own folder. I added screenshots and everything that was don
 
 These projects were made on gitlab in Vilnius University git.mif.vu.lt and ported over to github to showcase. Reports and slides were created on Overleaf LaTeX.
 
-The things that are not included are tasks and milestones that were created on gitlab.
+The things that are not included are tasks, milestones and git commit history that were created on gitlab.
