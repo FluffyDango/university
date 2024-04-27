@@ -6,7 +6,7 @@ These projects were made on gitlab in Vilnius University git.mif.vu.lt and porte
 
 The things that are not included are tasks, milestones and git commit history that were created on gitlab.
 
-SEMESTER 2: **kasbus** android app for OOP subject
-SEMESTER 3: **iskauda** virtualization project
-SEMESTER 3: **pullout** Problem-based project
-SEMESTER 4: **straysafe** Problem-based project (INCOMPLETE)
+SEMESTER 2: **kasbus** android app for OOP subject <br>
+SEMESTER 3: **iskauda** virtualization project<br>
+SEMESTER 3: **pullout** Problem-based project<br>
+SEMESTER 4: **straysafe** Problem-based project (INCOMPLETE)<br>
