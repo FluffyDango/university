@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9F1239"
+        tools:context=".MainActivity">
+
+        <!--Logo, lang btn-->
+
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="#d9dbdd"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/icon"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_background"
+                android:contentDescription="@string/icon_content_descr"
+                android:scaleType="fitCenter"
+                app:layout_constraintCircleRadius="5dp"
+                app:srcCompat="@drawable/kasbus_logo_words_transparent" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/filter"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/filter"
+                android:padding="16dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/filter_red" />
+
+            <Button
+                android:id="@+id/lang_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/language"
+                android:textColor="#29292e"
+                android:textSize="16sp"
+                app:backgroundTint="#ffffff" />
+
+        </LinearLayout>
+
+
+        <!-- Search Bar-->
+        <LinearLayout
+            android:id="@+id/search_and_filter"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginTop="5dp"
+            android:focusableInTouchMode="true"
+            android:gravity="center|center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top">
+
+
+            <SearchView
+                android:id="@+id/searchView"
+                style="@style/SearchViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:iconifiedByDefault="false"
+                android:queryHint="@string/search_bar_hint">
+
+            </SearchView>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bus_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#9F1239"
+            android:padding="5dp"
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_and_filter">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <include
+            android:id="@+id/loading_screen"
+            layout="@layout/loading_screen"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="invisible" />
+
+        <include
+            android:id="@+id/retry_loading_screen"
+            layout="@layout/retry_loading_screen"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

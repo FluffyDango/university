@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bus_container"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_background"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/bus_name"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        app:autoSizeTextType="uniform" />
+
+    <TextView
+        android:id="@+id/faculty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:gravity="center"
+        android:singleLine="true"
+        app:autoSizeTextType="uniform" />
+
+    <TextView
+        android:id="@+id/lecturers"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="#6b7280"
+        android:paddingStart="5dp"
+        android:paddingEnd="0dp"
+        app:autoSizeTextType="uniform" />
+
+</LinearLayout>
