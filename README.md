@@ -5,3 +5,8 @@ Each project has its own folder. I added screenshots and everything that was don
 These projects were made on gitlab in Vilnius University git.mif.vu.lt and ported over to github to showcase. Reports and slides were created on Overleaf LaTeX.
 
 The things that are not included are tasks, milestones and git commit history that were created on gitlab.
+
+SEMESTER 2: **kasbus** android app for OOP subject
+SEMESTER 3: **iskauda** virtualization project
+SEMESTER 3: **pullout** Problem-based project
+SEMESTER 4: **straysafe** Problem-based project (INCOMPLETE)
