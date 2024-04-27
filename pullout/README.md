@@ -1,6 +1,7 @@
 # pullOut Team
 
 IT Course semester 3 problem-based project. The subject was worth 15 credits, that is half of the semester credits + 5 credits which were combined from Programming software subject. In total 20 credits.
+At the bottom of this README you cann see example output.
 
 ## Team members:
  - *Morozov Oleksii*
@@ -135,3 +136,66 @@ NOTE: You have to be in the specific directory, else it will not understand whic
 
 ### Example photos
 A few can be found in `src/client/assets/photos`. More with which the program was tested on, can be found in this [google drive link](https://drive.google.com/drive/folders/1RMf1kKzsd8fB02sFniFgrXqjq3WZevqn?usp=drive_link)
+
+### Running the program
+
+![2024-04-27_15-48](https://github.com/FluffyDango/university/assets/62252774/3e29ee94-0e86-4404-b963-c3dd8e61cdcf)
+
+```
+pullout 1Def.JPG
+```
+```
+Address: V.Bielskio g. 6, LT-76126
+Name: Basf Šiauliai
+Organization: Line-X
+Telephone: +37069858099
+Title: Pardavimų Vadovas
+Website: www.line-x.lt
+```
+
+```
+pullout -p
+```
+```
+[all]
+
+id: 2
+Name: Piotr Jasinski
+Organization: Mediaspektras
+Title: Direktorius
+Telephone: +37067604754
+
+id: 5
+Name: Gintaras Paukštė
+Organization: House Of Prince Lietuva
+Title: Prekybos Plėtros Vadybininkas
+Address: Verkių g. 29, Vilnius, LT-09108
+Telephone: +37065256656
+
+id: 6
+Name: Basf Šiauliai
+Organization: Line-X
+Title: Pardavimų Vadovas
+Address: V.Bielskio g. 6, LT-76126
+Telephone: +37069858099
+Website: www.line-x.lt
+[default]
+
+id: 1
+Name: Gintaras Paukštė
+Organization: House Of Prince Lietuva
+Title: Prekybos Plėtros Vadybininkas
+Address: Verkių g. 29, Vilnius, LT-09108
+Telephone: +37065256656
+
+id: 3
+Name: ok
+
+id: 4
+Name: Andrius Tebelškis
+Organization: Aljansas Aibė
+Title: Verslo Plėtros Departamento Vadybininkas
+Address: Zamenhofo g. 5, Vilnius, LT 06332
+Telephone: +37065949520
+Website: www.aibe.lt
+```
