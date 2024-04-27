@@ -1,0 +1,21 @@
+<nav class="bg-neutral-700 text-white max-w-screen">
+  <div class="flex items-center justify-between w-full px-5 xl:px-12 py-6">
+    <!-- Hamburger menu for Mobile -->
+    <app-mobile-menu class="md:hidden"></app-mobile-menu>
+
+    <!-- Nav links -->
+    <app-header-navigation class="flex-1"></app-header-navigation>
+
+    <!-- Logo -->
+    <div class="flex-1 flex justify-center">
+      <a class="text-3xl font-bold font-heading" routerLink="/">StraySafe</a>
+    </div>
+
+    <!-- Profile and Language dropdown -->
+    <div class="flex-1 flex justify-end items-center space-x-6">
+      <app-lang-dropdown></app-lang-dropdown>
+      <app-profile-dropdown></app-profile-dropdown>
+    </div>
+  </div>
+</nav>
+  

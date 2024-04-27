@@ -1,0 +1,125 @@
+---
+- hosts: database
+  vars_files:
+    - vault.yml
+  vars:
+    ansible_become_pass: "iloveunix"
+    database_name: "pullout"
+    database_user: "pullout"
+    database_password: "pullout"
+    ansible_ssh_pipelining: true # Allow creation of temporary files on remote machine, else postgresql_user module will fail
+  become: yes
+
+  tasks:
+    - name: 1. Installing packages
+      apt:
+        pkg:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
+          - apache2
+          - php
+          - php-curl
+          - php-xml
+          - php-pgsql
+          - libapache2-mod-php
+        state: present
+        update-cache: yes
+
+    - name: 2. Copying database files to local directory
+      copy:
+        src: "../src/database_server/"
+        dest: "/var/www/pullout"
+
+    - name: 3. Download Composer installer
+      get_url:
+        url: "https://getcomposer.org/installer"
+        dest: "{{ ansible_user_dir }}/composer-setup.php"
+        mode: "0644"
+
+    - name: 4. Installing Composer
+      shell: "php {{ ansible_user_dir }}/composer-setup.php --install-dir=/usr/local/bin --filename=composer"
+
+    - name: 5. Starting PostgreSQL service
+      service:
+        name: postgresql
+        state: started
+
+    - name: 6. Creating pullout database
+      postgresql_db:
+        state: present
+        name: "{{ database_name }}"
+      become_user: postgres
+
+    - name: 7. Creating "{{ database_user }}" user for PostgreSQL
+      postgresql_user:
+        db: "{{ database_name }}" # Default database when user write "psql" in terminal
+        name: "{{ database_user }}"
+        password: "{{ database_password }}"
+        encrypted: yes
+        role_attr_flags: SUPERUSER
+      ignore_errors: yes
+      become_user: postgres
+
+    - name: 8. Restarting PostgreSQL
+      service:
+        name: postgresql
+        state: restarted
+
+    - name: 9. Execute SQL files to add tables
+      community.postgresql.postgresql_script:
+        db: "{{ database_name }}"
+        login_user: "{{ database_user }}"
+        login_password: "{{ database_password }}"
+        login_host: localhost
+        path: "{{ item }}"
+      loop:
+        - "/var/www/pullout/src/sql/addressbooks.sql"
+        - "/var/www/pullout/src/sql/locks.sql"
+        - "/var/www/pullout/src/sql/principals.sql"
+        - "/var/www/pullout/src/sql/propertystorage.sql"
+        - "/var/www/pullout/src/sql/users.sql"
+      ignore_errors: yes
+
+    - name: 10. Creating .env file
+      copy:
+        content: |
+          DB_HOST=localhost
+          DB_NAME={{ database_name }}
+          DB_USER={{ database_user }}
+          DB_PASSWORD={{ database_password }}
+        dest: "/var/www/pullout/.env"
+
+    - name: 11. Changing owner of /var/www/pullout to www-data
+      file:
+        path: "/var/www/pullout"
+        owner: www-data
+        group: www-data
+        recurse: yes
+
+    - name: 12. Using composer to install dependencies
+      composer:
+        command: install
+        working_dir: "/var/www/pullout/"
+      become_user: www-data
+
+    - name: 13. Moving apache2 vhost configuration
+      shell: "mv /var/www/pullout/src/apache2/pullout.conf /etc/apache2/sites-available/pullout.conf"
+
+    - name: 14. Enabling pullout.conf
+      shell: "a2ensite pullout.conf"
+
+    - name: 15. Disabling default.conf
+      shell: "a2dissite 000-default.conf"
+
+    - name: 16. Enable mod_rewrite
+      shell: "a2enmod rewrite"
+
+    - name: 17. Restarting apache2
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
+
+    - debug:
+        msg: FINISHED! Pullout database installed successfully. Now you can access it at http://{{ database_public_ip }}:{{ database_port_80 }}

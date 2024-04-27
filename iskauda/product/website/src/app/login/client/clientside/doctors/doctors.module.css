@@ -1,0 +1,106 @@
+.container {
+     background: white;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     margin: 2rem auto;
+     max-width: 95%;
+     padding: 1rem;
+     text-align: center;
+   }
+   
+   .searchContainer {
+     background: rgb(201, 39, 39);
+     padding: 0.75rem;
+     border-radius: 8px;
+     margin-bottom: 1rem;
+   }
+   
+   .searchInput {
+     width: 300px;
+     padding: 0.5rem;
+     margin: auto;
+     display: block;
+     border: 1px solid #ccc;
+     border-radius: 4px;
+   }
+   
+   .letterSection {
+     margin-bottom: 2rem;
+   }
+   
+   .letterHeader {
+     font-weight: bold;
+     color: #fff;
+     background: rgb(201, 39, 39);
+     padding: 0.75rem;
+     border-radius: 8px;
+   }
+   
+   .doctorCard {
+     background: #ffffff;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+     border-radius: 8px;
+     margin-bottom: 0.75rem;
+     padding: 0.75rem;
+     color: black;
+     font-size: 0.85em;
+   }
+   
+   .doctorInfo h3 {
+     margin-bottom: 0.4rem;
+     font-size: 1.1em;
+     font-weight: bold;
+   }
+   
+   .doctorInfo p {
+     margin: 0;
+     font-weight: bold;
+   }
+   
+   .footer {
+     background: rgb(175, 0, 0);
+     color: white;
+     text-align: center;
+     padding: 0.75rem;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     z-index: 1000;
+   }
+   
+   @media (max-width: 1024px) {
+     .container {
+       padding: 0.5rem;
+     }
+   }
+   
+   @media (max-width: 768px) {
+     .doctorCard {
+       padding: 0.5rem;
+     }
+   
+     .footer {
+       position: static;
+     }
+   }
+   
+   @media (max-width: 480px) {
+     .searchInput {
+       width: 80%;
+     }
+   
+     .container {
+       margin: 1rem 0.5rem;
+       border-radius: 4px;
+     }
+   
+     .letterHeader {
+       font-size: 1.2rem;
+     }
+   
+     .doctorCard, .footer {
+       padding: 0.4rem;
+     }
+   }
+   

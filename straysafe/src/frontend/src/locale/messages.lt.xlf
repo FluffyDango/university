@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="lt">
+    <body>
+    <trans-unit id="publishedInTheLast" datatype="html">
+        <source>Published in the last</source>
+        <target state="translated">Buvo paskelbtas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reportedTIMEAgo" datatype="html">
+        <source>reported <x id="INTERPOLATION" equiv-text="{{ report.timeAgo }}"/> ago</source>
+        <target state="translated">pranešta prieš <x id="INTERPOLATION" equiv-text="{{ report.timeAgo }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-box/report-box.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="lost" datatype="html">
+        <source>LOST</source>
+        <target state="translated">PAMESTAS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-box/report-box.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="found" datatype="html">
+        <source>FOUND</source>
+        <target state="translated">RASTAS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-box/report-box.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="author" datatype="html">
+        <source>Author</source>
+        <target state="translated">Autorius</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reportId" datatype="html">
+        <source>Report id</source>
+        <target state="translated">Pranešimo id</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="lastUpdated" datatype="html">
+        <source>Last Updated</source>
+        <target state="translated">Paskutinį kartą atnaujinta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="posted" datatype="html">
+        <source>Posted</source>
+        <target state="translated">Pranešta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="petId" datatype="html">
+        <source>pet ID</source>
+        <target state="translated">&#07;ugintinio ID</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="location" datatype="html">
+        <source>Location</source>
+        <target state="translated">Vieta</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="openMap" datatype="html">
+        <source>Open map</source>
+        <target state="translated">Atidaryti žemėlapį</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reportTags" datatype="html">
+        <source>Report tags</source>
+        <target state="translated">Pranešimo žymos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="petAttributes" datatype="html">
+        <source>Pet attributes</source>
+        <target state="translated">Augintinio požymiai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">51,52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="animalType" datatype="html">
+        <source>Animal type</source>
+        <target state="translated">Gyvuno tipas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="breed" datatype="html">
+        <source>Breed</source>
+        <target state="translated">Veislė</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">52,53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="gender" datatype="html">
+        <source>Gender</source>
+        <target state="translated">Lytis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="size" datatype="html">
+        <source>Size</source>
+        <target state="translated">Dydis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="donitantColors" datatype="html">
+        <source>Dominant colors</source>
+        <target state="translated">Dominuojančios spalvos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="collarColor" datatype="html">
+        <source>Collar color</source>
+        <target state="translated">Apykaklės spalva</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="contacts" datatype="html">
+        <source>Contacts</source>
+        <target state="translated">Kontaktai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">67,68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="telephone" datatype="html">
+        <source>Telephone</source>
+        <target state="translated">Telefonas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="email" datatype="html">
+        <source>Email</source>
+        <target state="translated">El. paštas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="socialLinks" datatype="html">
+        <source>Social links</source>
+        <target state="translated">Socialiniai ryšiai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="notes" datatype="html">
+        <source>Notes</source>
+        <target state="translated">Pastabos</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">75,76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="discussion" datatype="html">
+        <source>Discussion</source>
+        <target state="translated">Diskusija</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">82,84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="close" datatype="html">
+        <source>Close</source>
+        <target state="translated">Uždaryti</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.html</context>
+          <context context-type="linenumber">99,100</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="active" datatype="html">
+        <source>ACTIVE</source>
+        <target state="translated">AKTYVUS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nonActive" datatype="html">
+        <source>NEAKTIVE</source>
+        <target state="translated">NEAKTYVUS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/content/report-popup/report-popup.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="reportType" datatype="html">
+        <source>Report Type</source>
+        <target state="translated">Pranešimo tipas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="searchDistance" datatype="html">
+        <source>Search distance</source>
+        <target state="translated">Paieškos atstumas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="UseCurrentLocation" datatype="html">
+        <source>Use current location</source>
+        <target state="translated">Naudoti dabartinę vietą</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1km" datatype="html">
+        <source>1km</source>
+        <target state="translated">1 km</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5km" datatype="html">
+        <source>5km</source>
+        <target state="translated">5 km</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="25km" datatype="html">
+        <source>25km</source>
+        <target state="translated">25 km</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="125km" datatype="html">
+        <source>125km</source>
+        <target state="translated">125 km</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="all" datatype="html">
+        <source>all</source>
+        <target state="translated">visi</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="30min" datatype="html">
+        <source>30min</source>
+        <target state="translated">30 min</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2h" datatype="html">
+        <source>2h</source>
+        <target state="translated">2 val</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">36,37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6h" datatype="html">
+        <source>6h</source>
+        <target state="translated">6 val</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">37,38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="24h" datatype="html">
+        <source>24h</source>
+        <target state="translated">24 val</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d" datatype="html">
+        <source>5d</source>
+        <target state="translated">2 d</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="add" datatype="html">
+        <source>Add</source>
+        <target state="translated">Pridėti</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="remove" datatype="html">
+        <source>Remove</source>
+        <target state="translated">Pašalinti</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">61,62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dog" datatype="html">
+        <source>Dog</source>
+        <target state="translated">Šuo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cat" datatype="html">
+        <source>Cat</source>
+        <target state="translated">Katė</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="other" datatype="html">
+        <source>Other</source>
+        <target state="translated">Kitas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="male" datatype="html">
+        <source>Male</source>
+        <target state="translated">Vyras</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">76,77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="female" datatype="html">
+        <source>Female</source>
+        <target state="translated">Moteris</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">79,80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="createdBy" datatype="html">
+        <source>Created by</source>
+        <target state="translated">Sukurtas</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/filter/filter.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="filter" datatype="html">
+        <source>Filter</source>
+        <target state="translated">Filtras</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="order" datatype="html">
+        <source>Order</source>
+        <target state="translated">Rūšiuoti pagal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="newestOnTheTop" datatype="html">
+        <source>Newest on the top</source>
+        <target state="translated">Naujausias viršuje</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="nearestOnTheTop" datatype="html">
+        <source>Nearest on the top</source>
+        <target state="translated">Artimiausias viršuje</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="enterSearchRegionHere" datatype="html">
+        <source>Enter search region here</source>
+        <target state="translated">Įveskite paieškos regioną</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="search" datatype="html">
+        <source>Search</source>
+        <target state="translated">Ieškoti</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/grid-view/grid-view.component.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.home" datatype="html">
+        <source>Home</source>
+        <target state="translated">Pagrindinis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/mobile-menu/mobile-menu.component.html</context>
+          <context context-type="linenumber">17,18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.tips" datatype="html">
+        <source>Tips</source>
+        <target state="translated">Patarimai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/mobile-menu/mobile-menu.component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="header.reports" datatype="html">
+        <source>Reports</source>
+        <target state="translated">Pranešimai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="profile.profile" datatype="html">
+        <source>Profile</source>
+        <target state="translated">Paskyra</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/profile-dropdown/profile-dropdown.component.html</context>
+          <context context-type="linenumber">7,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="profile.yourProfile" datatype="html">
+        <source>Your profile</source>
+        <target state="translated">Jūsų paskyra</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/profile-dropdown/profile-dropdown.component.html</context>
+          <context context-type="linenumber">16,19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="profile.yourPets" datatype="html">
+        <source>Your pets</source>
+        <target state="translated">Jūsų augintiniai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/profile-dropdown/profile-dropdown.component.html</context>
+          <context context-type="linenumber">21,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="settings" datatype="html">
+        <source>Settings</source>
+        <target state="translated">Nustatymai</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/profile-dropdown/profile-dropdown.component.html</context>
+          <context context-type="linenumber">26,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="profile.signOut" datatype="html">
+        <source>Sign Out</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/profile-dropdown/profile-dropdown.component.html</context>
+          <context context-type="linenumber">31,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="homeWorks" datatype="html">
+        <source>home works!</source>
+        <target state="translated">Home LT veikia</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home-page/home-page.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,76 @@
+.historyContainer {
+     background: white;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     margin: 1rem auto;
+     max-width: 95%;
+     padding-bottom: 100px;
+     text-align: center;
+   }
+   
+   .header {
+     background: rgb(201, 39, 39);
+     color: white;
+     padding: 0.75rem;
+     border-radius: 8px;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+     text-align: center;
+   }
+   
+   .boldTitle {
+     font-weight: bold;
+   }
+   
+   .mainContent {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+     gap: 10px;
+     padding: 1rem;
+   }
+   
+   .card {
+     background: #ffffff;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+     border-radius: 8px;
+     margin-bottom: 0.75rem;
+     padding: 0.15rem;
+     color: rgb(0, 0, 0);
+   }
+   
+   .footer {
+     background: rgb(175, 0, 0);
+     color: white;
+     text-align: center;
+     padding: 0.75rem;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     z-index: 1000;
+   }
+   
+   @media (max-width: 1024px) {
+     .mainContent {
+       grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+     }
+   }
+   
+   @media (max-width: 768px) {
+     .mainContent {
+       grid-template-columns: 1fr;
+     }
+   }
+   
+   @media (max-width: 480px) {
+     .mainContent {
+       padding: 0.5rem;
+     }
+     
+     .card {
+       padding: 0.5rem;
+     }
+     
+     .footer {
+       padding: 0.5rem;
+     }
+   }   

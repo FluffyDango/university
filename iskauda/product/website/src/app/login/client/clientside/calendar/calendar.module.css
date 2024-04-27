@@ -1,0 +1,86 @@
+.calendarContainer {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 7rem auto;
+  max-width: 75%;
+  padding: 1rem;
+  text-align: center;
+}
+
+.header h1 {
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.day {
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.day:hover {
+  background-color: #e6e6e6;
+}
+
+.today {
+  background: #90ee90;
+}
+
+.appointment {
+  background: #add8e6;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.footer {
+  background: rgb(175, 0, 0);
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .calendarContainer {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+}

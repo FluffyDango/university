@@ -1,0 +1,16 @@
+<VirtualHost *:8080>
+    ServerAdmin straysafe@kieti.lt
+    ProxyRequests Off
+    ProxyPreserveHost On
+
+    <Proxy *>
+        Require all granted
+    </Proxy>
+
+    # Forward all requests to localhost:8080
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+
+    ErrorLog ${APACHE_LOG_DIR}/8080_error.log
+    CustomLog ${APACHE_LOG_DIR}/8080_access.log combined
+</VirtualHost>

@@ -1,0 +1,70 @@
+# ------------------------------
+# WEBSITE NEXT.JS
+
+# dependencies
+product/website/node_modules
+product/website/.pnp
+product/website/.pnp.js
+
+# testing
+product/website/coverage
+
+# next.js
+product/website/out/
+product/website/.next/
+
+# production
+product/website/build
+
+# misc
+product/website/.DS_Store
+product/website/*.pem
+
+# debug
+product/website/npm-debug.log*
+product/website/yarn-debug.log*
+product/website/yarn-error.log*
+
+# local env files
+product/website/.env*.local
+
+# vercel
+product/website/.vercel
+
+# typescript
+product/website/*.tsbuildinfo
+product/website/next-env.d.ts
+
+product/website/.env
+
+# ------------------------------
+# BACKEND EXPRESSJS
+
+# dependencies
+product/backend/node_modules
+product/backend/.pnp
+product/backend/.pnp.js
+
+# testing
+product/backend/coverage
+
+# production
+product/backend/build
+
+# misc
+product/backend/.DS_Store
+product/backend/*.pem
+
+# debug
+product/backend/npm-debug.log*
+product/backend/yarn-debug.log*
+product/backend/yarn-error.log*
+
+# local env files
+product/backend/.env*.local
+product/backend/.env
+
+# ------------------------------
+
+./.vscode
+./.gitlab

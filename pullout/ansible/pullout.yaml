@@ -1,0 +1,48 @@
+---
+- hosts: clients
+  vars_files:
+    - vault.yml
+  vars:
+    ansible_become_pass: "{{ new_sudo_pass }}"
+
+  tasks:
+    - name: 1. Change user "{{ ansible_user_id }}" password
+      user:
+        name: "{{ ansible_user_id }}"
+        password: "{{ new_sudo_pass | password_hash('sha512') }}"
+        update_password: always
+      vars:
+        ansible_become_pass: "{{ sudo_pass }}"
+      become: yes
+      ignore_errors: yes
+
+    - name: 2. Installing packages
+      apt:
+        pkg:
+          - pip
+          - python3-opencv
+          - tesseract-ocr-lit
+        state: present
+        update_cache: yes
+      become: yes
+
+    - name: 3. Copying client files to local directory
+      copy:
+        src: "../src/client"
+        dest: "{{ ansible_user_dir }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+    
+    - name: 4. Remove pip externally managed environment
+      file:
+        path: "/usr/lib/python3.11/EXTERNALLY-MANAGED"
+        state: absent
+      become: yes
+
+    - name: 5. Installing client cli
+      pip:
+        name: "{{ ansible_user_dir }}/client"
+        state: latest
+
+    - debug:
+        msg: "FINISHED! Pullout client installed successfully"

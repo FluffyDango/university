@@ -1,0 +1,26 @@
+<div clickedOutside (clickOutside)="onClickedOutside()">
+  <!-- Hamburger menu for Mobile -->
+  <button class="text-gray-300 focus:outline-none" (click)="toggleDropdown()">
+    <i class="fa-2x fa-solid fa-bars"></i>
+  </button>
+
+  <!-- Sidebar -->
+  <div
+    class="md:hidden fixed inset-y-0 left-0 w-48 bg-gray-900 text-white transition-transform duration-300 transform"
+    [class.translate-x-0]="dropdownOpen"
+    [class.-translate-x-full]="!dropdownOpen"
+  >
+    <ul class="px-6 py-1 mt-6 flex flex-col space-y-6 items-start h-full">
+      <li>
+        <a class="hover:bg-blue-600 p-3 hover:text-gray-200" i18n="@@header.home" routerLink="/" (click)="toggleDropdown()"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a class="hover:bg-blue-600 p-3 hover:text-gray-200" i18n="@@header.tips" routerLink="/tips" (click)="toggleDropdown()"
+          >Tips</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>

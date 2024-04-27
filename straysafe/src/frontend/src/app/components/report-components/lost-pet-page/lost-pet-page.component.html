@@ -1,0 +1,5 @@
+<div>
+  <app-address-input *ngIf="currentStep === 'location'"></app-address-input>
+  <app-image-upload *ngIf="currentStep === 'upload-photo'"></app-image-upload>
+  <app-report-summary *ngIf="currentStep === 'summary'"></app-report-summary>
+</div>

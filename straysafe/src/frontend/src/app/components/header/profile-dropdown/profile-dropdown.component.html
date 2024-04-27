@@ -1,0 +1,34 @@
+<div class="relative" clickedOutside (clickOutside)="onClickedOutside()">
+    <button
+      class="relative z-10 block rounded-md p-2 bg-blue-600 hover:bg-blue-800 text-gray-200 px-6 text-sm py-3 overflow-hidden focus:outline-none focus:border-white"
+      (click)="toggleDropdown()"
+    >
+    <span><fa-icon [icon]="faUser" class=""></fa-icon></span>
+    <span class="pl-1 hidden md:inline" i18n="@@profile.profile">Profile</span>
+    </button>
+    <div
+      *ngIf="dropdownOpen"
+      class="absolute right-0 top-full mt-2 py-2 w-48 bg-neutral-800 rounded-md shadow-xl z-20"
+    >
+      <a
+        href="#"
+        class="block px-4 py-2 text-sm capitalize text-white hover:bg-indigo-500 hover:text-white" i18n="@@profile.yourProfile"
+        >Your profile</a
+      >
+      <a
+        href="#"
+        class="block px-4 py-2 text-sm capitalize text-white hover:bg-indigo-500 hover:text-white" i18n="@@profile.yourPets"
+        >Your pets</a
+      >
+      <a
+        href="#"
+        class="block px-4 py-2 text-sm capitalize text-white hover:bg-indigo-500 hover:text-white" i18n="@@settings"
+        >Settings</a
+      >
+      <a
+        href="#"
+        class="block px-4 py-2 text-sm capitalize text-white hover:bg-indigo-500 hover:text-white" i18n="@@profile.signOut"
+        >Sign Out</a
+      >
+    </div>
+  </div>

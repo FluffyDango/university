@@ -1,0 +1,102 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-20">
+  <div class="bg-white p-8 w-4/5 h-4/5 overflow-auto rounded-lg"> 
+    <div class="flex justify-between mb-4">
+      <div class="text-left w-1/3">
+        <p class="text-gray-500"><ng-container i18n="@@author">Author</ng-container>: {{ report.authorName }} <span class="text-blue-500 cursor-pointer">{{ report.authorNickname }}</span></p>
+      </div>
+      <div class="flex items-center justify-center w-1/3 flex-grow">
+          <p class="rounded px-2 py-1"
+          [class.bg-red-300]="report.type === 0"
+          [class.bg-blue-300]="report.type === 1">
+          {{ report.type === 0 ? lost : found }}
+          </p>
+          <h2 class="text-lg text-gray-500 ml-1"><ng-container i18n="@@reportId">Report id</ng-container>: {{ report.id }}</h2>
+      </div>
+      <div class="flex-grow text-right w-1/3">
+        <p class="text-sm text-gray-500"><ng-container i18n="@@lastUpdated">Last Updated</ng-container>: {{ "LIGIC" }}</p>
+        <p class="text-sm text-gray-500"><ng-container i18n="@@posted">Posted</ng-container>: {{ report.posted }}</p>
+      </div>
+    </div>
+      <hr>
+    <div class="flex justify-center mt-1">
+      <div class="w-2/5"> 
+        <div class="overflow-hidden p-4 flex flex-col items-center bg-gray-100 rounded-lg">
+          <p class="mb-4"><b>{{ report.petName }}</b>, <ng-container i18n="@@petId">pet ID</ng-container>: {{ report.pet_id }}</p>
+          <div class="">
+            <img src="{{ report.imageURL }}" class="object-cover h-80 w-80 rounded-lg">
+          </div>
+          <p class="mb-2"><ng-container i18n="@@location">Location</ng-container>: {{ report.latitude }}, {{ report.longtitude }} <span class="text-blue-500 cursor-pointer" i18n="@@openMap">Open map</span></p>
+        </div>
+        <div class="mt-4 bg-gray-100 rounded-lg p-4">
+          <p class="text-xl font-bold mb-4" i18n="@@reportTags">Report tags</p>
+          <div class="flex items-center justify-center">
+            <p class="rounded px-2 py-1 mr-2 bg-gray-300">
+            {{ report.animalType | uppercase }}
+            </p>
+            <p class="rounded px-2 py-1 mr-2"
+            [class.bg-red-300]="report.type === 0"
+            [class.bg-blue-300]="report.type === 1">
+            {{ report.type === 0 ? lost : found }}
+            </p>
+            <p class="rounded px-2 py-1 mr-2"
+            [class.bg-green-500]="report.status === 0"
+            [class.bg-blue-300]="report.status === 1">
+            {{ report.status === 0 ? active : nonActive }}
+            </p>
+        </div>
+        </div>
+      </div>
+      <div class="w-3/5 flex flex-col justify-start pl-8">
+        <div class="bg-gray-100 rounded-lg p-4">
+          <p class="text-2xl font-bold mb-4" i18n="@@petAttributes">Pet attributes</p>
+          <div class="flex flex-wrap">
+            <ul class="text-left flex-grow">
+              <li><b i18n="@@animalType">Animal type</b>: {{ report.animalType }}</li>
+              <li><b i18n="@@breed">Breed</b>: {{ report.breed }}</li>
+              <li><b i18n="@@gender">Gender</b>: {{ report.gender }}</li>
+            </ul>
+            <ul class="text-left flex-grow">
+              <li><b i18n="@@size">Size</b>: {{ report.size }}</li>
+              <li><b i18n="@@donitantColors">Dominant colors</b>: {{ report.dominantColors }}</li>
+              <li><b i18n="@@collarColor">Collar color</b>: {{ report.collarColor }}</li>
+            </ul>
+          </div>
+          
+        </div>
+        <div class="mt-4 bg-gray-100 rounded-lg p-4">
+          <p class="text-2xl font-bold mb-4" i18n="@@contacts">Contacts</p>
+          <div class="mb-2">
+            <p class="text-gray-500"><ng-container i18n="@@telephone">Telephone</ng-container>: {{ report.tel }}</p>
+            <p class="text-gray-500"><ng-container i18n="@@email">Email</ng-container>: {{ report.email }}</p>
+            <p class="text-gray-500"><ng-container i18n="@@socialLinks">Social links</ng-container>: {{ report.social }}</p>
+          </div>
+        </div>
+        <div class="mt-4 bg-gray-100 rounded-lg p-4">
+          <p class="text-2xl font-bold mb-4" i18n="@@notes">Notes</p>
+          <p class="text-gray-500">{{ report.note }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-4 text-left">
+      <hr><p class="text-2xl mb-6 ml-2 font-bold" i18n="@@discussion">Discussion</p>
+
+      @for (comment of report.comments; track comment) {
+        <div class="flex items-start mb-4">
+          <img src="{{ comment.image }}" alt="User Image" class="w-16 h-16 rounded-full mr-4">
+          <div class="flex flex-col">
+            <div class="flex items-center mb-2">
+              <p class="font-semibold text-gray-700 mr-2">{{ comment.role }}</p>
+              <p class="text-gray-500">{{ comment.user }}</p>
+              <p class="text-sm text-gray-500 ml-2">Posted on {{ comment.date }}</p>
+            </div>
+            <p class="">{{ comment.comment }}</p>
+          </div>
+        </div>
+      }
+
+    <div class="text-center mt-8">
+      <button class="border border-blue-500 px-10 py-2 rounded" i18n="@@close" (click)="close()">Close</button>
+    </div>
+  </div>
+</div>

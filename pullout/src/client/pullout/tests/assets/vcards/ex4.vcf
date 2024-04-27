@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Michael Johnson
+N:Johnson;Michael;;;
+ORG:XYZ Industries
+TEL:+999888777
+EMAIL:michael.johnson@xyzindustries.com
+TITLE:Software Engineer
+ADR:456 Tech Street, Techland, Country
+URL:http://www.xyzindustries.com
+END:VCARD

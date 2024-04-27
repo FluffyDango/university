@@ -1,0 +1,47 @@
+---
+- hosts: clients
+  vars_files:
+    - ../shell/vault.yml
+  vars:
+    ansible_become_pass: "{{ new_sudo_pass }}"
+    webserver_public_ip: "{{ webserver_public_ip }}"
+    webserver_port: "{{ webserver_port }}"
+
+  tasks:
+    - name: "1. Changing user {{ ansible_user_id }} password"
+      user:
+        name: "{{ ansible_user_id }}"
+        password: "{{ new_sudo_pass | password_hash('sha512') }}"
+        update_password: always
+      vars:
+        ansible_become_pass: "{{ sudo_pass }}"
+      become: yes
+      ignore_errors: yes
+
+    - name: 2. Updating cache
+      apt:
+        update_cache: true
+      become: yes
+
+    - name: 3. Installing firefox
+      apt:
+        pkg: firefox-esr
+        state: present
+      become: yes
+
+    - name: 4. Creating guest user
+      user:
+        name: guest
+        password: "{{ new_sudo_pass | password_hash('sha512' )}}"
+        shell: /bin/bash
+        createhome: yes
+      become: yes
+
+    - name: 5. Map ip to domain of iskauda.com
+      lineinfile:
+        path: /etc/hosts
+        line: "{{ webserver_public_ip }} iskauda.com www.iskauda.com"
+      become: yes
+
+    - debug:
+        msg: "FINISHED: Client is ready to use."

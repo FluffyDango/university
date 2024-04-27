@@ -1,0 +1,22 @@
+<div class="flex p-2">
+    <div class="hidden sm:block lg:w-80 p-2">
+        <div class="p-4 border border-solid border-black bg-gray-200 max-md:hidden">
+            <app-filter></app-filter>
+        </div>
+    </div>
+    <div class="sm:w-full lg:w-5/6 p-2">
+        <div class="flex items-center space-x-4 w-full justify-between mb-4">
+            <div class="relative">
+                <button class="border border-gray-300 px-4 py-2 mr-2 rounded-md w-20 md:hidden" i18n="@@filter">Filter</button>
+                <button class="border border-gray-300 px-4 py-2 rounded-md w-32 max-sm:w-20" i18n="@@order">Order</button>
+                <select class="absolute inset-0 opacity-0 cursor-pointer border border-gray-300 px-4 py-2 rounded-md">
+                    <option value="1" i18n="@@newestOnTheTop">Newest on the top</option>
+                    <option value="2" i18n="@@nearestOnTheTop">Nearest on the top</option>
+                </select>
+            </div>
+            <input type="text" placeholder="{{ enterSearchRegion }}" class="border border-gray-300 px-4 py-2 rounded-md italic flex-grow" />
+            <button class="border border-gray-300 px-4 py-2 rounded-md bold w-24" i18n="@@search">Search</button>
+        </div>
+        <app-content></app-content>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Jane Smith
+N:Smith;Jane;;;
+ORG:ABC Corporation
+TEL:+111223344
+EMAIL:jane.smith@abccorp.com
+TITLE:Marketing Manager
+ADR:123 Main Street, Cityville, Country
+URL:http://www.abccorp.com
+END:VCARD

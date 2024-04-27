@@ -1,0 +1,143 @@
+---
+- hosts: webservers
+  vars_files:
+    - ../shell/vault.yml
+  vars:
+    ansible_become_pass: "{{ new_sudo_pass }}"
+    server_id_webserver: "iskauda_webserver"
+
+  tasks:
+    - name: "1. Changing user {{ ansible_user_id }} password"
+      user:
+        name: "{{ ansible_user_id }}"
+        password: "{{ new_sudo_pass | password_hash('sha512') }}"
+        update_password: always
+      vars:
+        ansible_become_pass: "{{ sudo_pass }}"
+      become: yes
+      ignore_errors: yes
+
+    - name: 2. Updating cache
+      apt:
+        update_cache: true
+      become: yes
+
+    - name: 3.1 Installing dependencies (apache2)
+      apt:
+        pkg: apache2
+        state: present
+      become: yes
+
+    - name: 3.2 Installing dependencies (npm)
+      apt:
+        pkg: npm
+        state: present
+      become: yes
+
+    - name: 3.3 Installing dependencies (pm2)
+      npm:
+        name: pm2
+        global: yes
+        state: present
+      become: yes
+
+    - name: 3.4 Installing dependencies (ufw)
+      apt:
+        pkg: ufw
+        state: present
+      become: yes
+
+    - name: 4.1 Check if website directory exists
+      stat:
+        path: "{{ ansible_user_dir }}/website"
+      register: website_dir
+
+    - name: 4.2 Copying website contents folder to ~/website
+      copy:
+        src: "{{ playbook_dir }}/../product/website"
+        dest: "{{ ansible_user_dir }}"
+        group: "{{ ansible_user_id }}"
+        owner: "{{ ansible_user_id }}"
+      when: not website_dir.stat.exists
+
+    - name: 5. Copying virtual host configuration 
+      copy:
+        src: "{{ playbook_dir }}/../product/website/iskauda.conf"
+        dest: /etc/apache2/sites-available/iskauda.conf
+        group: root
+        owner: root
+      become: yes
+  
+    - name: 6. Enabling apache2 proxy module
+      apache2_module:
+        name: proxy
+        state: present
+      become: yes
+
+    - name: 7. Enabling apache2 proxy-http module
+      apache2_module:
+        name: proxy_http
+        state: present
+      become: yes
+
+    - name: 8. Disabling default virtual host
+      command: a2dissite 000-default.conf
+      become: yes
+
+    - name: 9. Enabling our website virtual host
+      command: a2ensite iskauda.conf
+      become: yes
+
+    - name: 10. Restarting apache2
+      systemd_service:
+        name: apache2
+        state: restarted
+      become: yes
+
+    - name: 11. Installing packages based on package.json for Website
+      npm:
+        path: "{{ ansible_user_dir }}/website"
+
+    - name: 12. Building next.js website
+      command: npm run build
+      args:
+        chdir: "{{ ansible_user_dir }}/website"
+
+    - name: 13. Starting the website with pm2
+      command: pm2 start npm --name "{{ server_id_webserver }}" -- start
+      args:
+        chdir: "{{ ansible_user_dir }}/website"
+
+    - name: 14.1 Allow URL access (port 80)
+      ufw:
+        rule: allow
+        port: 80
+        from_ip: any
+      become: yes
+
+    - name: 14.2 Allow ssh access (port 22)
+      ufw:
+        rule: allow
+        port: 22
+        from_ip: any
+      become: yes
+
+    - name: 14.3 Make default deny
+      ufw:
+        default: deny
+      become: yes
+
+    - name: 14.4 Enabling ufw
+      ufw:
+        state: enabled
+      become: yes
+
+    - name: 15. Creating .env file
+      copy:
+        content: |
+          NEXT_PUBLIC_DB_IP={{ database_public_ip }}
+          NEXT_PUBLIC_DB_PORT={{ database_port_80 }}
+        dest: "/home/{{ ansible_user_id }}/website/.env"
+
+    - debug:
+        msg: "FINISHED! Website is running on http://{{ webserver_public_ip }}:{{ webserver_port }}"

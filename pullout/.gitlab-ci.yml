@@ -1,0 +1,119 @@
+image: python:3.11
+
+variables:
+  IMG_PROC_SERVER_PATH: ${CI_PROJECT_DIR}/src/img_proc_server
+  CLIENT_PATH: ${CI_PROJECT_DIR}/src/client
+
+stages:
+  - get-time-report
+  - test
+  - build
+  - deploy
+
+cache:
+    paths:
+        - .apt/
+        - ${IMG_PROC_SERVER_PATH}/.venv/
+        - ${CLIENT_PATH}/.venv/
+        - ~/.cache/pypoetry/
+        - ~/.cache/pip/
+
+before_script:
+  - pip install poetry
+  - poetry config virtualenvs.in-project true
+
+get-time-report:
+  stage: get-time-report
+  script:
+    - CURRENT_DATE=$(date +%Y-%m-%d)
+    - >
+      curl -X POST https://api.track.toggl.com/reports/api/v3/workspace/7292654/search/time_entries.pdf
+        -H "Content-Type: application/json"
+        -d '{"start_date": "2023-09-01", "end_date": "2024-01-20", "grouped": true, "project_ids": [197698990], "order_by": "user","order_dir": "ASC"}'
+        -o timelogs/${CURRENT_DATE}.pdf
+        -u ${TOGGL_TRACK_EMAIL}:${TOGGL_TRACK_PASS}
+    - >
+      curl --request POST --header "PRIVATE-TOKEN: ${ACCESS_TOKEN}"
+        "${CI_PROJECT_URL}/${CI_PROJECT_ID}/merge_requests"
+        --data "source_branch=auto-timelogs&target_branch=master&title=Auto-generated%20timelogs%20for%20${CURRENT_DATE}"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'schedule'
+
+test-img-proc-server:
+  stage: test
+  script:
+    # Restore apt-get cache from cache
+    - export APT_DIR=.apt
+    - export APT_STATE_LISTS=$APT_DIR/lists
+    - export APT_CACHE_ARCHIVES=$APT_DIR/archives
+    - mkdir -p $APT_CACHE_ARCHIVES/partial
+    - mkdir -p $APT_STATE_LISTS
+    # Update apt-get lists.
+    - apt-get update
+    # Install from cache if possible.
+    - >
+      apt-get install -y \
+        -o dir::cache::archives="$APT_CACHE_ARCHIVES" \
+        python3-opencv \
+        tesseract-ocr-eng \
+        tesseract-ocr-lit
+    - cd ${IMG_PROC_SERVER_PATH}
+    - poetry install
+    - poetry run python3 -m unittest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+test-client:
+  stage: test
+  script:
+    - cd ${CLIENT_PATH}
+    - poetry install
+    - poetry run python3 -m unittest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+
+build:
+  stage: build
+  script:
+    - cd ${IMG_PROC_SERVER_PATH}
+    - poetry install
+    - poetry version minor
+    - poetry build
+    - cd ${CLIENT_PATH}
+    - poetry install
+    - poetry version minor
+    - poetry build
+  artifacts:
+    paths:
+      - ${IMG_PROC_SERVER_PATH}/dist
+      - ${CLIENT_PATH}/dist
+  except:
+    - schedules
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - cd ${IMG_PROC_SERVER_PATH}
+    - 'IMG_PROC_VERSION=$(poetry version | awk "{print $2}")'
+    - 'TAG_NAME="v${PROJECT_VERSION}"'
+    - 'IMG_PROC_DIST_PATH="${IMG_PROC_SERVER_PATH}/dist/img_proc_server-$PROJECT_VERSION.tar.gz"'
+    - 'IMG_PROC_URL="${CI_PROJECT_URL}/${CI_PROJECT_ID}/jobs/artifacts/master/raw/${IMG_PROC_DIST_PATH}?job=build"'
+    - 'CLIENT_DIST_PATH="${CLIENT_PATH}/dist/client-$PROJECT_VERSION.tar.gz"'
+    - 'CLIENT_URL="${CI_PROJECT_URL}/${CI_PROJECT_ID}/jobs/artifacts/master/raw/${CLIENT_DIST_PATH}?job=build"'
+    - >
+      curl --request POST --header "PRIVATE-TOKEN: $GITLAB_PERSONAL_ACCESS_TOKEN"
+        --form name="$TAG_NAME"
+        --form ref="$CI_COMMIT_REF_NAME"
+        --form tag_name="$TAG_NAME"
+        --form description="Release of $TAG_NAME at $CI_COMMIT_SHORT_SHA"
+        --form "assets[links][][name]=Python image processing server dict"
+        --form "assets[links][][url]=$IMG_PROC_URL"
+        --form "assets[links][][name]=Python client dict"
+        --form "assets[links][][url]=$CLIENT_URL"
+        "${CI_PROJECT_URL}/${CI_PROJECT_ID}/releases"
+  except:
+    - schedules
+  only:
+    - master

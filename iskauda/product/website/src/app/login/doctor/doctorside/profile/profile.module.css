@@ -1,0 +1,96 @@
+.profileContainer {
+  display: grid;
+  gap: 15px;
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 95%;
+  margin: 2rem auto;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.sidebar {
+  background: rgb(201, 39, 39);
+  padding: 0.75rem;
+  color: white;
+  box-shadow: 0 2px 4px rgb(0, 0, 0);
+}
+
+.boldTitle {
+  font-weight: bold;
+}
+
+.mainContent {
+  padding: 0rem;
+}
+
+.card, .info {
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgb(0, 0, 0);
+  margin-bottom: 0.75rem;
+  padding: 0.6rem;
+  color: rgb(0, 0, 0);
+  border-radius: 8px;
+  font-size: 0.85em;
+}
+
+.card h4, .info h4 {
+  margin-bottom: 0.4rem;
+  font-size: 1em;
+}
+
+.footer {
+  background: rgb(175, 0, 0);
+  color: white;
+  text-align: center;
+  padding: 0.75rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+@media (max-width: 1200px) {
+  .profileContainer {
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
+  }
+
+  .sidebar, .mainContent {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .card, .info {
+    padding: 0.5rem;
+  }
+
+  .btnFullInfo {
+    padding: 4px 10px;
+  }
+
+  .footer {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card h4, .info h4 {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 576px) {
+  .card, .info {
+    font-size: 0.8em;
+  }
+
+  .btnFullInfo {
+    width: 100%;
+    padding: 8px;
+    margin-top: 0.5rem;
+  }
+}

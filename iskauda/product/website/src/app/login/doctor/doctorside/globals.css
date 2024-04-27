@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: rgb(200, 200, 200);
+  margin: 0;
+  padding: 0;
+}
+.buttons-container {
+  display: flex;
+  gap: 8px;
+}
+.signUpButton,
+.logInButton {
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  font-weight: bold;
+  padding: 0 1.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s;
+  width: auto;
+}
+
+.signUpButton:hover,
+.logInButton:hover {
+  background-color: #f3f4f6;
+}
+
+@media (max-width: 768px) {
+  .signUpButton,
+  .logInButton {
+    padding: 0 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .signUpButton,
+  .logInButton {
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+  }
+}

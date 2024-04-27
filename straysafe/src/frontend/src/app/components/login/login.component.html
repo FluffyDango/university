@@ -1,0 +1,17 @@
+<div class="max-w-md mx-auto p-4 shadow-lg rounded-lg">
+  <form (ngSubmit)="onSubmitLogin()" #loginForm="ngForm">
+    <div class="mb-4">
+      <input type="login" id="loginName" name="login" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [(ngModel)]="login" />
+      <label for="loginName" class="block text-sm font-medium text-gray-700">Username</label>
+    </div>
+    <div class="mb-4">
+      <input type="password" id="loginPassword" name="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" [(ngModel)]="password" />
+      <label for="loginPassword" class="block text-sm font-medium text-gray-700">Password</label>
+    </div>
+
+    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300 text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:ring-indigo-800">
+      Sign In
+    </button>
+  </form>
+
+</div>

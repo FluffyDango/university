@@ -1,0 +1,117 @@
+.homeContainer {
+     background: white;
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     margin: 2rem auto;
+     max-width: 95%;
+     padding: 1rem;
+     text-align: center;
+   }
+   
+   .header {
+     background: rgb(201, 39, 39);
+     padding: 1rem;
+     text-align: center;
+     border-radius: 8px 8px 0 0;
+     text-align: center;
+     color: white;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+   }
+   
+   .mainContent {
+     padding: 1rem;
+     text-align: center;
+   }
+
+   .boldTitle {
+    font-weight: bold;
+  }
+   
+   .stats, .awards, .faq, .contactInfo {
+     margin-bottom: 1rem;
+     background: #ffffff;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+     border-radius: 8px;
+     padding: 0.75rem;
+     color: rgb(0, 0, 0);
+     text-align: center;
+   }
+   
+   .awards ul {
+     list-style-type: none;
+     padding: 0;
+     margin: 0;
+     text-align: center;
+   }
+   
+   .faqItem {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 1px 2px rgb(0, 0, 0);
+     margin-bottom: 0.5rem;
+     color: rgb(0, 0, 0);
+     padding: 0.5rem;
+     border-radius: 4px;
+     text-align: center;
+   }
+   
+   .contactInfo {
+     background: rgb(201, 39, 39);
+     padding: 0.75rem;
+     border-radius: 4px;
+     text-align: center;
+     color: white;
+     box-shadow: 0 2px 4px rgb(0, 0, 0);
+   }
+   
+   .footer {
+     background: rgb(175, 0, 0);
+     color: white;
+     text-align: center;
+     padding: 0.75rem;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     z-index: 1000;
+   }
+   
+   @media (max-width: 1024px) {
+     .header, .mainContent, .stats, .awards, .faq, .contactInfo {
+       padding: 0.6rem;
+     }
+   }
+   
+   @media (max-width: 768px) {
+     .homeContainer {
+       margin: 1rem auto;
+       padding: 0.5rem;
+     }
+   
+     .header, .mainContent, .stats, .awards, .faq, .contactInfo, .footer {
+       padding: 0.4rem;
+     }
+   
+     .mainContent {
+       padding-top: 0;
+     }
+   }
+   
+   @media (max-width: 480px) {
+     .homeContainer {
+       margin: 1rem 0.5rem;
+       border-radius: 4px;
+     }
+   
+     .header {
+       font-size: 1.2rem;
+     }
+   
+     .mainContent, .stats, .awards, .faq, .contactInfo {
+       padding: 0.3rem;
+     }
+   
+     .footer {
+       padding: 0.5rem;
+       position: static;
+     }
+   }

@@ -1,0 +1,202 @@
+---
+- hosts: database
+  vars_files:
+    - ../shell/vault.yml
+  vars:
+    ansible_become_pass: "{{ new_sudo_pass }}"
+    server_id: "iskauda"
+
+  tasks:
+    - name: "1. Changing user {{ ansible_user_id }} password"
+      user:
+        name: "{{ ansible_user_id }}"
+        password: "{{ new_sudo_pass | password_hash('sha512') }}"
+        update_password: always
+      vars:
+        ansible_become_pass: "{{ sudo_pass }}"
+      become: yes
+      ignore_errors: yes
+
+    - name: 2. Updating cache
+      apt:
+        update_cache: true
+      become: yes
+
+    - name: 3.1 Installing dependency (mariadb-server)
+      apt:
+        pkg: mariadb-server
+        state: present
+      become: yes
+
+    - name: 3.2 Installing pyhthon3-mysqldb
+      apt:
+        pkg: python3-mysqldb
+        state: present
+      become: yes
+
+    - name: 3.3 Installing dependency (npm)
+      apt:
+        pkg: npm
+        state: present
+      become: yes
+
+    - name: 3.4 Installing dependency (apache2)
+      apt:
+        pkg: apache2
+        state: present
+      become: yes
+      
+    - name: 3.5 Installing dependency (pm2)
+      npm:
+        name: pm2
+        global: yes
+        state: present
+      become: yes
+
+    - name: 3.6 Installing dependency (ufw)
+      apt:
+        pkg: ufw
+        state: present
+      become: yes
+
+    - name: 4. Starting and enbaling MariaDB server
+      service:
+        name: mariadb
+        enabled: true
+        state: started
+      become: yes
+
+    - name: 5. Creating admin user for MariaDB
+      mysql_user:
+        user: admin
+        password: "{{ database_password }}"
+        priv: "*.*:ALL,GRANT"
+        host: "%"
+        state: present
+        login_user: root
+        login_password: "{{ sudo_pass }}"
+      become: yes
+
+    - name: 6. Creating a database
+      mysql_db:
+        name: iskauda_db
+        state: present
+      become: yes
+
+    - name: 7. Copying database sql file
+      copy:
+        src: ../misc/hospitalDB.sql
+        dest: hospitalDB.sql
+
+    - name: 8. Copying sample data sql file
+      copy:
+        src: ../misc/hospitalSampleData.sql
+        dest: hospitalSampleData.sql
+
+    - name: 9. Importing datbase sql file
+      mysql_db:
+        login_user: admin
+        login_password: "{{ database_password }}"
+        state: import
+        name: iskauda_db
+        target: hospitalDB.sql
+
+    - name: 10. Importing sample data sql file
+      mysql_db:
+        login_user: admin
+        login_password: "{{ database_password }}"
+        state: import
+        name: iskauda_db
+        target: hospitalSampleData.sql
+
+    - name: 11.1 Check if backend directory exists
+      stat:
+        path: "{{ ansible_user_dir }}/backend"
+      register: backend_dir
+
+    - name: 11.2 Copying backend contents folder to ~/backend
+      copy:
+        src: "{{ playbook_dir }}/../product/backend"
+        dest: "{{ ansible_user_dir }}"
+        group: "{{ ansible_user_id }}"
+        owner: "{{ ansible_user_id }}"
+      when: not backend_dir.stat.exists
+
+    - name: 12. Copying virtual host configuration
+      copy:
+        src: "../product/backend/iskauda_backend.conf"
+        dest: /etc/apache2/sites-available/iskauda_backend.conf
+        group: root
+        owner: root
+      become: yes
+  
+    - name: 13. Enabling apache2 proxy module
+      apache2_module:
+        name: proxy
+        state: present
+      become: yes
+
+    - name: 14. Enabling apache2 proxy-http module
+      apache2_module:
+        name: proxy_http
+        state: present
+      become: yes
+
+    - name: 15. Disabling default virtual host
+      shell: a2dissite 000-default.conf
+      become: yes
+
+    - name: 16. Enabling our website virtual host
+      shell: a2ensite iskauda_backend.conf
+      become: yes
+
+    - name: 17. Restarting apache2
+      systemd_service:
+        name: apache2
+        state: restarted
+      become: yes
+
+    - name: 18.1 Allow URL access (port 80)
+      ufw:
+        rule: allow
+        port: 80
+        from_ip: any
+      become: yes
+
+    - name: 18.2 Allow ssh access (port 22)
+      ufw:
+        rule: allow
+        port: 22
+        from_ip: any
+      become: yes
+
+    - name: 18.3 Make default deny
+      ufw:
+        default: deny
+      become: yes
+
+    - name: 18.4 Enabling ufw
+      ufw:
+        state: enabled
+      become: yes
+
+    - name: 19. Installing packages based on package.json
+      npm:
+        path: "/home/{{ ansible_user_id }}/backend"
+
+    - name: 20. Creating .env file
+      copy:
+        content: |
+          DB_HOST=127.0.0.1
+          DB_USER=admin
+          DB_PASSWORD={{ database_password }}
+          DB_DATABASE=iskauda_db
+        dest: "/home/{{ ansible_user_id }}/backend/.env"
+
+    - name: 21. Starting the backend with pm2
+      command: pm2 start npm --name "{{ server_id }}" -- start
+      args:
+        chdir: "/home/{{ ansible_user_id }}/backend"
+
+    - debug:
+        msg: "FINISED! Database is ready. Test to see if it works with: curl --location 'http://{{ webserver_public_ip }}:{{ webserver_port }}/patients'"

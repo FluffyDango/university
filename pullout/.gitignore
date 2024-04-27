@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+*.pyc
+
+# Packages
+*.egg
+!/tests/**/*.egg
+/*.egg-info
+**/dist/*
+build
+_build
+.cache
+*.so
+
+# Installer logs
+pip-log.txt
+src/img_proc_server/app.log
+
+# Unit test / coverage reports
+.coverage
+.pytest_cache
+
+.DS_Store
+.idea/*
+.python-version
+.vscode/*
+
+MANIFEST.in
+/docs/site/*
+.mypy_cache
+
+.venv
+pip-wheel-metadata
+/poetry.toml
+
+poetry/core/*
+
+src/client/tests/assets/db/
+src/database_server/vendor/
+src/database_server/.env

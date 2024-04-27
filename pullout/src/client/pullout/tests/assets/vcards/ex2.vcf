@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:Marius Jankauskas
+N:Jankauskas;Marius;;;
+ORG:ABC Corporation
+TEL:+37061234567
+EMAIL:marius.jankauskas@abccorp.com
+TITLE:Marketing Manager
+ADR:Didžioji g. 123, Vilnius, LT-01234, Lithuania
+URL:http://www.abccorp.com
+END:VCARD
