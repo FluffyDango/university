@@ -3,12 +3,6 @@
 IT Course semester 3. Virtualization project. We had to use MIF opennebula hypervisor to create VMs and automate setup for a web server. With minimal webdev. The focus were ansible scripts, bash and VM's.
 Screenshots of website can be seen at the bottom of the readme
 
-## Team members
-
- - Janiūnas Domas
- - Krištapavičius Anupras
- - Narbutas Renaldas
- - Trubila Kipras
 
 ## Project topic: *Hospital*
 
@@ -20,7 +14,14 @@ Hospital website that contains ansible setup scripts. Made for 4 machines: clien
 
 Patient registration, login, possibility to register and check-out with a doctor, patient card, doctor's separate login, list of doctors, doctor's work schedule, search for doctors by name, surname, level (e.g. cardiologist), doctor's work schedule with calendar (e.g. google calendar).
 
-## Overview
+## Team members
+
+ - Janiūnas Domas
+ - Krištapavičius Anupras
+ - Narbutas Renaldas
+ - Trubila Kipras
+
+## Software overview
 
  - Webserver:
    - Hosted on: *Apache2*

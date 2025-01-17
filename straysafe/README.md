@@ -12,9 +12,15 @@
 
 Develop an web app /web platform that lets you tag a location of where you found a lost animal. With this kind of app you could potentially share the picture, location, comments, etc. with someone who has lost an animal so that they could find it. As an addition having the location of the nearest clinic or shelter nearby could make it even easier to take them some place safe. The system must integrate smart solutions and include several algorithms to support big amounts of users around the world.
 
+FOR FULL REPORT CLICK [HERE](./LaTeX/StraySafe_report.pdf)
+
 #### Vision
 
 Our project is a comprehensive, user-friendly platform dedicated to reuniting lost pets with their owners. This platform helps with searching for lost pets by centralizing all necessary resources and information into one accessible place.
+
+#### Website photos
+
+
 
 ## Overview
 
