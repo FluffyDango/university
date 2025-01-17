@@ -1,9 +1,15 @@
 package com.straysafe.backend.domain;
 
+import com.straysafe.backend.util.enums.Role;
+
 public record UserCredentialDAOResponse(
-        Long id,
+        String id,
         String firstName,
         String lastName,
         String login,
-        String password
-){}
+        String password,
+        String email,
+        String phone,
+        Role role
+) {
+}

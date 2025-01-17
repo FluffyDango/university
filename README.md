@@ -9,4 +9,4 @@ The things that are not included are tasks, milestones and git commit history th
 SEMESTER 2: **kasbus** android app for OOP subject <br>
 SEMESTER 3: **iskauda** virtualization project<br>
 SEMESTER 3: **pullout** Problem-based project<br>
-SEMESTER 4: **straysafe** Problem-based project (INCOMPLETE)<br>
+SEMESTER 4: **straysafe** Problem-based project<br>

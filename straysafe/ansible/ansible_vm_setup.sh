@@ -14,9 +14,11 @@ ENDPOINT=https://grid5.mif.vu.lt/cloud3/RPC2
 declare -A TEMPLATE
 WEB_TEMPLATE_ID=2485
 DB_TEMPLATE_ID=2484
-TEMPLATE_ID_LIST=(2485 2484)
-TEMPLATE["$WEB_TEMPLATE_ID,DESC"]="Webserver template"
-TEMPLATE["$DB_TEMPLATE_ID,DESC"]="Database template"
+TRANSLATE_TEMPLATE_ID=2648
+TEMPLATE_ID_LIST=(2485 2484 2648)
+TEMPLATE["$WEB_TEMPLATE_ID,DESC"]="Webserver machine template"
+TEMPLATE["$DB_TEMPLATE_ID,DESC"]="Database machine template"
+TEMPLATE["$TRANSLATE_TEMPLATE_ID,DESC"]="Libretranslate machine template"
 
 TEMPLATE_DESC=()
 for TEMPLATE_ID in "${TEMPLATE_ID_LIST[@]}"; do
@@ -26,7 +28,7 @@ done
 select_template() {
     PS3="Select a template (enter the number): "
     select option in "${TEMPLATE_DESC[@]}"; do
-        if [[ "$REPLY" =~ ^[1-2]$ ]]; then
+        if [[ "$REPLY" =~ ^[1-3]$ ]]; then
             RESULT=${TEMPLATE_ID_LIST[$REPLY-1]}
             break
         else 
@@ -216,7 +218,9 @@ for VM_ID in "${VM_ID_LIST[@]}"; do
     VM_DATA["$VM_ID,SSH_CON"]=$(cat vm-info.txt | grep CONNECT\_INFO1| cut -d '=' -f 2 | tr -d '"')
     VM_DATA["$VM_ID,PRIVATE_IP"]=$(cat vm-info.txt | grep PRIVATE\_IP| cut -d '=' -f 2 | tr -d '"')
     VM_DATA["$VM_ID,PUBLIC_IP"]=$(cat vm-info.txt | grep PUBLIC\_IP| cut -d '=' -f 2 | tr -d '"')
-    VM_DATA["$VM_ID,PORT_443"]=$(cat vm-info.txt | grep 'TCP_PORT_FORWARDING=' | sed 's/.* \([0-9]\+\):80.*/\1/')
+    VM_DATA["$VM_ID,PORT_80"]=$(cat vm-info.txt | grep 'TCP_PORT_FORWARDING=' | sed 's/.* \([0-9]\+\):80 .*/\1/')
+    VM_DATA["$VM_ID,PORT_8080"]=$(cat vm-info.txt | grep 'TCP_PORT_FORWARDING=' | sed 's/.* \([0-9]\+\):8080 .*/\1/')
+    VM_DATA["$VM_ID,PORT_8000"]=$(cat vm-info.txt | grep 'TCP_PORT_FORWARDING=' | sed 's/.* \([0-9]\+\):8000.*/\1/')
     VM_DATA["$VM_ID,PORT_5432"]=$(cat vm-info.txt | grep 'TCP_PORT_FORWARDING=' | sed 's/.* \([0-9]\+\):5432.*/\1/')
     VM_DATA["$VM_ID,SSH"]="${VM_DATA["$VM_ID,USERNAME"]}@${VM_DATA["$VM_ID,PRIVATE_IP"]}"
     echo -e "${GREEN}Successfully retrieved info about ${VM_DATA["$VM_ID,NAME"]}\n\
@@ -231,7 +235,9 @@ for VM_ID in "${VM_ID_LIST[@]}"; do
         printf "webservers_${VM_DATA["$VM_ID,SSH"]}_pass: \"${VM_DATA["$VM_ID,VM_PASSWORD"]}\"\n" >> vault.yml
         printf "webservers_${VM_DATA["$VM_ID,SSH"]}_public_ip: \"${VM_DATA["$VM_ID,PUBLIC_IP"]}\"\n" >> vault.yml
         printf "webservers_${VM_DATA["$VM_ID,SSH"]}_private_ip: \"${VM_DATA["$VM_ID,PRIVATE_IP"]}\"\n" >> vault.yml
-        printf "webservers_${VM_DATA["$VM_ID,SSH"]}_port: \"${VM_DATA["$VM_ID,PORT_80"]}\"\n" >> vault.yml
+        printf "webservers_${VM_DATA["$VM_ID,SSH"]}_angular_port: \"${VM_DATA["$VM_ID,PORT_80"]}\"\n" >> vault.yml
+        printf "webservers_${VM_DATA["$VM_ID,SSH"]}_spring_port: \"${VM_DATA["$VM_ID,PORT_8080"]}\"\n" >> vault.yml
+        printf "webservers_${VM_DATA["$VM_ID,SSH"]}_python_port: \"${VM_DATA["$VM_ID,PORT_8000"]}\"\n" >> vault.yml
         LAST_WEB_VM_ID=$VM_ID
     fi
 
@@ -241,6 +247,14 @@ for VM_ID in "${VM_ID_LIST[@]}"; do
         printf "databases_${VM_DATA["$VM_ID,SSH"]}_private_ip: \"${VM_DATA["$VM_ID,PRIVATE_IP"]}\"\n" >> vault.yml
         printf "databases_${VM_DATA["$VM_ID,SSH"]}_port: \"${VM_DATA["$VM_ID,PORT_5432"]}\"\n" >> vault.yml
         LAST_DB_VM_ID=$VM_ID
+    fi
+
+    if [ "${VM_DATA["$VM_ID,TEMPLATE_ID"]}" == "$TRANSLATE_TEMPLATE_ID" ]; then
+        printf "translators_${VM_DATA["$VM_ID,SSH"]}_pass: \"${VM_DATA["$VM_ID,VM_PASSWORD"]}\"\n" >> vault.yml
+        printf "translators_${VM_DATA["$VM_ID,SSH"]}_public_ip: \"${VM_DATA["$VM_ID,PUBLIC_IP"]}\"\n" >> vault.yml
+        printf "translators_${VM_DATA["$VM_ID,SSH"]}_private_ip: \"${VM_DATA["$VM_ID,PRIVATE_IP"]}\"\n" >> vault.yml
+        printf "translators_${VM_DATA["$VM_ID,SSH"]}_port: \"${VM_DATA["$VM_ID,PORT_80"]}\"\n" >> vault.yml
+        LAST_TR_VM_ID=$VM_ID
     fi
 
     user="${VM_DATA["$VM_ID,USERNAME"]}"
@@ -256,7 +270,6 @@ for VM_ID in "${VM_ID_LIST[@]}"; do
     fi
     ((index++))
 done
-printf "webservers_${VM_DATA["$LAST_WEB_VM_ID,SSH"]}_database_private_ip: \"${VM_DATA["$LAST_WEB_VM_ID,PRIVATE_IP"]}\"\n" >> vault.yml
 rm vm-info.txt
 echo ""
 
@@ -267,7 +280,7 @@ while true; do
     read -p "Reenter new database password: " -s DATABASE_PASSWORD2
     echo ""
     if [ "$DATABASE_PASSWORD" == "$DATABASE_PASSWORD2" ]; then
-        printf "database_password: \"$DATABASE_PASSWORD\"" >> vault.yml
+        printf "database_password: \"$DATABASE_PASSWORD\"\n" >> vault.yml
         echo -e "${GREEN}Database password successfully added to vault.yml${CRESET}"
         break
     else
@@ -276,6 +289,7 @@ while true; do
 done
 echo ""
 
+printf "webservers_${VM_DATA["$LAST_WEB_VM_ID,SSH"]}_database_private_ip: \"${VM_DATA["$LAST_DB_VM_ID,PRIVATE_IP"]}\"\n" >> vault.yml
 # --------------------------------------------------
 # Encrypt vault
 while true; do
@@ -306,6 +320,12 @@ for VM_ID in "${VM_ID_LIST[@]}"; do
         printf "%s\n" "${VM_DATA["$VM_ID,SSH"]}" >> hosts
     fi
 done
+printf "[translators]\n" >> hosts
+for VM_ID in "${VM_ID_LIST[@]}"; do
+    if [ "${VM_DATA["$VM_ID,TEMPLATE_ID"]}" == "$TRANSLATE_TEMPLATE_ID" ]; then
+        printf "%s\n" "${VM_DATA["$VM_ID,SSH"]}" >> hosts
+    fi
+done
 echo -e "${GREEN}Successfully created hosts file\n${CRESET}"
 
 # --------------------------------------------------
@@ -321,44 +341,44 @@ else
     ask_if_to_continue
 fi
 
-
-# Ask if you want to use website-setup-no-gitlab.yaml or website-setup.yaml
-read -p "Do you want to build locally and use these files instead of artifacts from gitlab? MAKE SURE YOU HAVE AT LEAST 5GB (Y/n): " NO_GITLAB
-NO_GITLAB=$(echo $NO_GITLAB | tr '[:upper:]' '[:lower:]')
-if [ "$NO_GITLAB" == "y" ] || [ -z "$NO_GITLAB" ]; then
-    echo -e "${GREEN}Using website-setup-no-gitlab.yaml${CRESET}"
-    WEBSITE_PLAYBOOK="website-setup-no-gitlab.yaml"
-else
-    echo -e "${GREEN}Using website-setup.yaml${CRESET}"
-    WEBSITE_PLAYBOOK="website-setup.yaml"
-fi
+echo "Please update in gitlab ci/cd variables and rerun pipe, wait for it to complete"
+echo "DATABASE_IP: ${VM_DATA["$LAST_DB_VM_ID,PRIVATE_IP"]}"
+echo "DATABASE_USER_PASSWORD: (can't say password)"
+echo "SPRING_API_URL: http://${VM_DATA["$LAST_WEB_VM_ID,PUBLIC_IP"]}"
+echo "LIBRETRANSLATE_API_URL: http://${VM_DATA["$LAST_TR_VM_ID,PUBLIC_IP"]}"
+echo "press any key to continue..."
+read -s -n 1
 
 # --------------------------------------------------
 # Run playbooks
-echo "Running $WEBSITE_PLAYBOOK playbook"
-ansible-playbook "$WEBSITE_PLAYBOOK" -i hosts --ask-vault-pass
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}Successfully finished\n${CRESET}"
-else
-    echo -e "${ORANGE}Failed. Try again later with\nansible-playbook $WEBSITE_PLAYBOOK -i hosts --ask-vault-pass\n${CRESET}"
-fi
-for VM_ID in "${VM_ID_LIST[@]}"; do
-    if [ "${VM_DATA["$VM_ID,TEMPLATE_ID"]}" == "$WEB_TEMPLATE_ID" ]; then
-        printf "Connect to webserver with %s:%s\n" "${VM_DATA["$VM_ID,PUBLIC_IP"]}" "${VM_DATA["$VM_ID,PORT_80"]}"
-    fi
-done
+PLAYBOOKS=("webserver-setup.yaml" "webserver-download.yaml" "database-setup.yaml" "libretranslate-setup.yaml")
 
-echo "Running database-setup.yaml playbook"
-ansible-playbook database-setup.yaml -i hosts --ask-vault-pass
-if [ $? -eq 0 ]; then
-    echo -e "${GREEN}Successfully finished\n${CRESET}"
-else
-    echo -e "${ORANGE}Failed. Try again later with\nansible-playbook database-setup.yaml -i hosts --ask-vault-pass\n${CRESET}"
-fi
+run_playbook() {
+    local playbook=$1
+    echo "Running $playbook playbook"
+    ansible-playbook $playbook -i hosts --ask-vault-pass
+    if [ $? -eq 0 ]; then
+        echo -e "${GREEN}Successfully finished\n${CRESET}"
+    else
+        echo -e "${ORANGE}Failed. Try again later with\nansible-playbook $playbook -i hosts --ask-vault-pass\n${CRESET}"
+        if [ "$playbook" = "webserver-download.yaml" ]; then
+            echo "Do not worry, you can upload all builds and send it from this machine, follow the README.md on how to do that"
+        fi
+    fi
+}
+
+for playbook in "${PLAYBOOKS[@]}"; do
+    run_playbook $playbook
+done
 
 # --------------------------------------------------
 # Print SSH connections to the user
 for VM_ID in "${VM_ID_LIST[@]}"; do
     echo "[ ${VM_DATA["$VM_ID,NAME"]} ] ${VM_DATA["$VM_ID,SSH_CON"]}"
-    rm -rf straysafe
+done
+
+for VM_ID in "${VM_ID_LIST[@]}"; do
+    if [ "${VM_DATA["$VM_ID,TEMPLATE_ID"]}" == "$WEB_TEMPLATE_ID" ]; then
+        printf "Connect to webserver with %s:%s\n" "${VM_DATA["$VM_ID,PUBLIC_IP"]}" "${VM_DATA["$VM_ID,PORT_80"]}"
+    fi
 done

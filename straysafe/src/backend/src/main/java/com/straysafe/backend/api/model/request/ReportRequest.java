@@ -1,31 +1,22 @@
 package com.straysafe.backend.api.model.request;
 
+import com.straysafe.backend.util.enums.ReportType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 public record ReportRequest(
-        String imageURL,
-        String timeAgo,
-        String petName,
-        int status,
-        String location,
-        String authorName,
-        String authorNickname,
-        int type,
-        long id,
-        Timestamp posted,
-        String animalType,
-        long pet_id,
+        @NotNull
+        ReportType reportType,
+        @NotNull(message = "Longitude is required")
+        BigDecimal longitude,
+        @NotNull(message = "Latitude is required")
         BigDecimal latitude,
-        BigDecimal longtitude,
-        String dominantColors,
-        String collarColor,
-        String breed,
-        String size,
-        String gender,
-        String tel,
-        String email,
-        String social,
+        @NotBlank(message = "Address is required")
+        String address,
+        @NotBlank(message = "Pet is required")
+        String petId,
         String note
 ) {
 }

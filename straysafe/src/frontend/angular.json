@@ -37,10 +37,12 @@
             "styles": [
               "src/styles.css",
               "./node_modules/leaflet/dist/leaflet.css",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/leaflet.markercluster/dist/MarkerCluster.css",
-              "./node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
+              "./node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+              "./node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": [],
+            "scripts": ["node_modules/hammerjs/hammer.min.js"],
             "allowedCommonJsDependencies": ["leaflet", "leaflet.markercluster"]
           },
           "configurations": {
