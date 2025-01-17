@@ -20,6 +20,16 @@ Our project is a comprehensive, user-friendly platform dedicated to reuniting lo
 
 #### Website photos
 
+![WelcomePage](https://github.com/user-attachments/assets/4b6dce17-d0dd-429b-952d-6f49a6388941)
+![SimilarityPage](https://github.com/user-attachments/assets/6cb19b17-6aa6-4bb5-8e24-a6a7a29bec89)
+![SearchMap](https://github.com/user-attachments/assets/e9961c3e-765b-4ad7-86ba-33b7febb0cac)
+![SearchAll](https://github.com/user-attachments/assets/2c307e0d-e7bb-49fe-9d5a-dbf39e5e3947)
+![ReportPopup](https://github.com/user-attachments/assets/1b776d52-a6bc-404e-a182-2cc4557806b8)
+![ReportCreation](https://github.com/user-attachments/assets/4b0ef0cb-c594-4be3-b0c8-9dd4d4b449bd)
+![ProfilePage](https://github.com/user-attachments/assets/49ef471f-a4a6-4477-aa1b-032fb4d1cd54)
+![PetCreation](https://github.com/user-attachments/assets/39eea8af-033b-48e8-a5cd-47f146e4c15e)
+![AddressInputPage](https://github.com/user-attachments/assets/5b34bb24-a7df-41e5-9730-343711fb26cd)
+
 
 
 ## Overview
