@@ -1,5 +1,3 @@
-For now this repository contains work in progress.
-
 Commands not to forget
 
 ```bash
