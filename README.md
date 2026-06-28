@@ -10,3 +10,5 @@ SEMESTER 2: **kasbus** android app for OOP subject <br>
 SEMESTER 3: **iskauda** virtualization project<br>
 SEMESTER 3: **pullout** Problem-based project<br>
 SEMESTER 4: **straysafe** Problem-based project<br>
+SEMESTER 6: **coursework-networking**<br>
+SEMESTER 7: **bachelors-work**<br>
