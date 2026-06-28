@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt,fleqn]{article}
+\input{allPacks}
+
+\newtoggle{inLithuanian}
+\settoggle{inLithuanian}{false}
+
+\newtoggle{needPreface}
+\settoggle{needPreface}{false}
+
+\newtoggle{signaturesOnTitlePage}
+\settoggle{signaturesOnTitlePage}{false}
+
+\input{macros}
+
+\begin{document}
+ % #1 -report type, #2 - title, #3-7 students, #8 - supervisor
+ \depttitlepage{Information Technologies 2025 year coursework}{Automated management of Network Systems\\{\small Tinklo įrenginių automatizuotas valdymas}}{Renaldas Narbutas}{}{}{}{}{Eduardas Kutka}
+
+\tableofcontents
+
+
+% \sectionWithoutNumber{Sutartinis terminų žodynas}{keywords}{\input{Sections/keywords}}
+
+\bothabstracts{\input{Sections/abstractEN}}
+{Darbo pavadinimas kita kalba}
+{\input{Sections/abstract}}
+
+
+\sectionWithoutNumber{\keyWordIntroduction}{intro}
+\input{Sections/Main/introduction.tex}
+
+\newpage
+\section{Analysis}\label{sec:motivation}
+\input{Sections/Main/analysis}
+\section{Design}\label{sec:design}
+\input{Sections/Main/design}
+\section{Implementation}\label{sec:implementation}
+\input{Sections/Main/implementation}
+\sectionWithoutNumber{\keyWordConclusions}{conclu}
+\input{Sections/conclusions.tex}
+\sectionWithoutNumber{Ateities tyrimų planas}{future}{\input{Sections/tyrimu_planas}}
+
+
+\referenceSources{literatureSources}
+
+\newpage
+\input{Sections/appendices}
+
+\end{document}

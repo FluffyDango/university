@@ -1,0 +1,89 @@
+"""
+Graph C: Performance vs Object Count
+Shows how filesystems handle large numbers of files.
+"""
+from data_loaders import DataLoader
+from config import VARIANTS, COLORS, LINE_STYLES, MARKERS, GRAPH_STYLE, OUTPUT_DIR
+import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+
+plt.rcParams.update(GRAPH_STYLE)
+
+
+def plot_performance_vs_object_count():
+    object_counts = [100, 500, 1000, 2500, 10000]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
+
+    for variant in VARIANTS:
+        if not variant["path"].exists():
+            continue
+
+        backend = variant["backend"]
+        fs = variant["fs"]
+        color = COLORS[fs]
+        linestyle = LINE_STYLES[backend]
+        marker = MARKERS[backend]
+
+        put_throughputs = []
+        get_throughputs = []
+
+        for obj_count in object_counts:
+            # PUT throughput
+            try:
+                df_put = DataLoader.load_warp_analysis(
+                    variant["path"], f"PUT-objects-{obj_count}")
+                if df_put is not None and 'PUT' in df_put['op'].values:
+                    put_ops = df_put[df_put['op'] == 'PUT']
+                    put_throughputs.append(put_ops['mb_per_sec'].mean())
+                else:
+                    put_throughputs.append(None)
+            except:
+                put_throughputs.append(None)
+
+            # GET throughput
+            try:
+                df_get = DataLoader.load_warp_analysis(
+                    variant["path"], f"GET-objects-{obj_count}")
+                if df_get is not None and 'GET' in df_get['op'].values:
+                    get_ops = df_get[df_get['op'] == 'GET']
+                    get_throughputs.append(get_ops['mb_per_sec'].mean())
+                else:
+                    get_throughputs.append(None)
+            except:
+                get_throughputs.append(None)
+
+        label = f"{backend}-{fs}"
+
+        # Plot PUT
+        ax1.plot(object_counts, put_throughputs, marker=marker, color=color,
+                 linestyle=linestyle, label=label, linewidth=2.5, markersize=7)
+
+        # Plot GET
+        ax2.plot(object_counts, get_throughputs, marker=marker, color=color,
+                 linestyle=linestyle, label=label, linewidth=2.5, markersize=7)
+
+    # Configure PUT plot
+    ax1.set_title('PUT Throughput vs Object Count',
+                  fontsize=14, fontweight='bold')
+    ax1.set_xlabel('Number of Objects', fontsize=12)
+    ax1.set_ylabel('Throughput (MB/s)', fontsize=12)
+    ax1.set_xscale('log')
+    ax1.legend(framealpha=0.9, ncol=2)
+    ax1.grid(True, alpha=0.3, linestyle='--', which='both')
+
+    # Configure GET plot
+    ax2.set_title('GET Throughput vs Object Count',
+                  fontsize=14, fontweight='bold')
+    ax2.set_xlabel('Number of Objects', fontsize=12)
+    ax2.set_ylabel('Throughput (MB/s)', fontsize=12)
+    ax2.set_xscale('log')
+    ax2.legend(framealpha=0.9, ncol=2)
+    ax2.grid(True, alpha=0.3, linestyle='--', which='both')
+
+    plt.tight_layout()
+    output_file = OUTPUT_DIR / 'graph_c_performance_vs_object_count.pdf'
+    plt.savefig(output_file, format='pdf', dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"✓ Created: {output_file.name}")

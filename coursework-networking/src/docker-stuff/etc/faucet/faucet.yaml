@@ -1,0 +1,28 @@
+---
+include: [acls.yaml]
+vlans:
+  vlan1:
+    vid: 100
+    description: First VM network
+    acls_in: [allow-ssh, vlan-protect]
+  vlan2:
+    vid: 200
+    description: Second VM network
+    acls_in: [allow-ssh, vlan-protect]
+dps:
+  switch-1:
+    dp_id: 0x1
+    hardware: Open vSwitch
+    interfaces:
+      1:
+        native_vlan: vlan1
+      2:
+        native_vlan: vlan1
+  switch-2:
+    dp_id: 0x2
+    hardware: Open vSwitch
+    interfaces:
+      1:
+        native_vlan: vlan2
+      2:
+        native_vlan: vlan2

@@ -1,0 +1,22 @@
+---
+- hosts: cluster
+  vars_files: [vault.yml]
+  vars:
+    ansible_become_pass: '{{ new_sudo_pass }}'
+    private_ip: '{{ private_ip }}'
+  tasks:
+    - name: 1. Changing user {{ ansible_user_id }} password
+      user:
+        name: '{{ ansible_user_id }}'
+        password: "{{ new_sudo_pass | password_hash('sha512') }}"
+        update_password: always
+      vars:
+        ansible_become_pass: '{{ sudo_pass }}'
+      become: true
+      ignore_errors: true  # If password was already changed ignore
+    - name: 2. Updating cache
+      apt:
+        update_cache: true
+      become: true
+    - debug:
+        msg: FINISHED

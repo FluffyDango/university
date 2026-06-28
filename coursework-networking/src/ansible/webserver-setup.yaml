@@ -1,0 +1,24 @@
+---
+- hosts: webservers
+  vars_files: [vault.yml]
+  vars:
+    ansible_become_pass: "{{ lookup('vars', 'webservers_' + inventory_hostname + '_pass') }}"  # imported from vault
+    USER: "{{ lookup('env','USER') }}"
+  become: true
+  tasks:
+    - name: Download pipx, libpq-dev, python3-dev, build-essential and python3-opencv
+      apt:
+        name: [pipx, libpq-dev, python3-dev, build-essential]
+        state: present
+        update-cache: true
+    - name: Configure Apache
+      ansible.builtin.shell: |
+        a2dissite 000-default.conf &&
+        a2ensite frontend.conf
+        a2enmod rewrite
+    - name: Restart Apache to apply changes
+      systemd:
+        name: apache2
+        state: restarted
+    - debug:
+        msg: Setup complete

@@ -1,0 +1,37 @@
+---
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    user: root
+    ports: [9090:9090]
+    volumes:
+      - ./docker-stuff/etc/prometheus/prometheus-docker-compose.yml:/etc/prometheus/prometheus.yml
+      - ./docker-stuff/etc/prometheus/faucet.rules.yml:/etc/prometheus/faucet.rules.yml
+    links: [faucet, gauge]
+    networks: [sdn]
+  grafana:
+    image: grafana/grafana:latest
+    user: root
+    ports: [3000:3000]
+    volumes: [./docker-stuff/opt/grafana:/var/lib/grafana]
+    links: [prometheus]
+    networks: [sdn]
+  gauge:
+    image: faucet/gauge:latest
+    environment:
+      GAUGE_CONFIG: /etc/faucet/gauge.yaml
+    volumes:
+      - ./docker-stuff/var/log/faucet:/var/log/faucet
+      - ./docker-stuff/etc/faucet:/etc/faucet
+    ports: [6654:6653, 9303:9303]
+    networks: [sdn]
+  faucet:
+    image: faucet/faucet:latest
+    volumes:
+      - ./docker-stuff/var/log/faucet:/var/log/faucet
+      - ./docker-stuff/etc/faucet:/etc/faucet
+    ports: [6653:6653, 9302:9302]
+    networks: [sdn]
+networks:
+  sdn:
+    driver: bridge

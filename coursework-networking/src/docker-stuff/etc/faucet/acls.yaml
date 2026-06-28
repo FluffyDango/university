@@ -1,0 +1,21 @@
+---
+acls:
+  vlan-protect:
+    - rule:
+        actions:
+          allow: false
+  allow-ssh:
+    # client to server
+    - rule:
+        dl_type: 0x0800
+        nw_proto: 6  # TCP
+        tcp_dst: 22
+        actions:
+          allow: true
+    # server to client
+    - rule:
+        dl_type: 0x0800
+        nw_proto: 6  # TCP
+        tcp_src: 22
+        actions:
+          allow: true
